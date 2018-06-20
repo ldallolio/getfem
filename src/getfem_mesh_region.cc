@@ -32,28 +32,33 @@ namespace getfem {
     this->operator=(other);
   }
 
+
   mesh_region::mesh_region()
-    : p(std::make_shared<impl>()), id_(size_type(-2)), type_(size_type(-1)),
-    partitioning_allowed{true}, parent_mesh(nullptr){
+    : p(std::make_shared<impl>()), id_(size_type(-2)),
+      partitioning_allowed(true), parent_mesh(0), index_updated(false)
+  {
     if (me_is_multithreaded_now()) prohibit_partitioning();
     mark_region_changed();
   }
 
-  mesh_region::mesh_region(size_type id__) : id_(id__), type_(size_type(-1)),
-    partitioning_allowed{true}, parent_mesh(nullptr){
-    mark_region_changed();
-  }
+  // p is left undefined, the mesh region contains its id information only
+  mesh_region::mesh_region(size_type id__)
+    : id_(id__),
+      partitioning_allowed(true), parent_mesh(0), index_updated(false)
+  { }
 
-  mesh_region::mesh_region(mesh& m, size_type id__, size_type type) :
-    p(std::make_shared<impl>()), id_(id__), type_(type),
-    partitioning_allowed{true}, parent_mesh(&m){
+  mesh_region::mesh_region(mesh& m, size_type id__)
+    : p(std::make_shared<impl>()), id_(id__), partitioning_allowed(true),
+      parent_mesh(&m), index_updated(false)
+  {
     if (me_is_multithreaded_now()) prohibit_partitioning();
     mark_region_changed();
   }
 
   mesh_region::mesh_region(const dal::bit_vector &bv)
-    : p(std::make_shared<impl>()), id_(size_type(-2)), type_(size_type(-1)),
-    partitioning_allowed{true}, parent_mesh(nullptr){
+    : p(std::make_shared<impl>()), id_(size_type(-2)),
+      partitioning_allowed(true), parent_mesh(0), index_updated(false)
+  {
     if (me_is_multithreaded_now()) prohibit_partitioning();
     add(bv);
     mark_region_changed();
@@ -87,35 +92,34 @@ namespace getfem {
     return *this;
   }
 
-  mesh_region& mesh_region::operator=(const mesh_region &from){
-    if (!parent_mesh && !from.parent_mesh){
-      id_ = from.id_;
-      type_ = from.type_;
-      partitioning_allowed.store(from.partitioning_allowed.load());
-      if (from.p) {
-        if (!p) p = std::make_shared<impl>();
-        wp() = from.rp();
+  mesh_region& mesh_region::operator=(const mesh_region &from)
+  {
+    if (!this->parent_mesh && !from.parent_mesh)
+    {
+      this->id_ = from.id_;
+      this->partitioning_allowed = from.partitioning_allowed;
+      if (from.p.get()) {
+        if (!this->p.get()) this->p = std::make_shared<impl>();
+        this->wp() = from.rp();
       }
       else p = nullptr;
     }
-    else if (!parent_mesh) {
-      p = from.p;
-      id_ = from.id_;
-      type_ = from.type_;
-      parent_mesh = from.parent_mesh;
-      partitioning_allowed.store(from.partitioning_allowed.load());
+    else if (!this->parent_mesh) {
+      this->p = from.p;
+      this->id_ = from.id_;
+      this->parent_mesh = from.parent_mesh;
+      this->partitioning_allowed = from.partitioning_allowed;
     }
     else {
-      if (from.p){
-        wp() = from.rp();
-        type_= from.get_type();
-        partitioning_allowed.store(from.partitioning_allowed.load());
+      if (from.p.get())
+      {
+        this->wp() = from.rp();
+        this->partitioning_allowed = from.partitioning_allowed;
       }
       else if (from.id_ == size_type(-1)) {
-        clear();
-        add(parent_mesh->convex_index());
-        type_ = size_type(-1);
-        partitioning_allowed = true;
+        this->clear();
+        this->add(this->parent_mesh->convex_index());
+        this->partitioning_allowed = true;
       }
       touch_parent_mesh();
     }
