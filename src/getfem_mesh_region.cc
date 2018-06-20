@@ -205,11 +205,11 @@ namespace getfem {
     partitioning_allowed = true;
   }
 
-  void mesh_region::bounding_box(base_node& Pmin, base_node& Pmax) const{
-    auto &mesh = *get_parent_mesh();
-    for (auto &&cv : dal::bv_iterable_c{index()}) {
+  void mesh_region::bounding_box(base_node& Pmin, base_node& Pmax) const {
+    auto &mesh = *this->get_parent_mesh();
+    for (auto cv : dal::bv_iterable_c(index())) {
       for (const auto &pt : mesh.points_of_convex(cv)) {
-        for (auto j = 0; j != Pmin.size(); ++j){
+        for (auto j = 0; j < Pmin.size(); j++){
           Pmin[j] = std::min(Pmin[j], pt[j]);
           Pmax[j] = std::max(Pmax[j], pt[j]);
         }
@@ -225,12 +225,15 @@ namespace getfem {
     return partitioning_allowed;
   }
 
-  void mesh_region::update_index() const{
-    auto& convex_index = me_is_multithreaded_now() ?
-                           rp().index_.thrd_cast() : rp().serial_index_;
-    if (convex_index.card() != 0) convex_index.clear();
-    for (auto &&pair : *this){
-      if (pair.second.any()) convex_index.add(pair.first);
+  /* may be optimized .. */
+  const dal::bit_vector&  mesh_region::index() const
+  {
+    GMM_ASSERT1(p.get(), "Use from_mesh on that region before");
+    dal::bit_vector& convex_index = rp().index_.thrd_cast();
+    convex_index.clear();
+    for (const_iterator it = begin(); it != end(); ++it)
+    {
+      if (it->second.any()) convex_index.add(it->first);
     }
   }
 
