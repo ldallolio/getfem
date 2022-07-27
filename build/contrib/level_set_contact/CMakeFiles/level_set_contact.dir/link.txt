@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblevel_set_contact.a  CMakeFiles/level_set_contact.dir/contact_problem.cpp.o CMakeFiles/level_set_contact.dir/test_contact.cpp.o
+/usr/bin/ranlib liblevel_set_contact.a
