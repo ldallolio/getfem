@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/xfem_stokes.dir/xfem_stokes.cc.o  -o xfem_stokes 

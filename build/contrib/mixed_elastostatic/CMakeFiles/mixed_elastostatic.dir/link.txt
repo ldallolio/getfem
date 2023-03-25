@@ -1,2 +1,0 @@
-/usr/bin/ar qc libmixed_elastostatic.a  CMakeFiles/mixed_elastostatic.dir/mixed_elastostatic.cc.o
-/usr/bin/ranlib libmixed_elastostatic.a

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8...3.20)
 set (project level_set_contact)
 
 set(${project}_SOURCES

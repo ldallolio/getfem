@@ -1,2 +1,0 @@
-/usr/bin/ar qc libdelaminated_crack.a  CMakeFiles/delaminated_crack.dir/delaminated_crack.cc.o
-/usr/bin/ranlib libdelaminated_crack.a

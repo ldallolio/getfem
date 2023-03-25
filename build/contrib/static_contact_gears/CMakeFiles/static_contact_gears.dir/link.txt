@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/static_contact_gears.dir/static_contact_gears.cc.o  -o static_contact_gears 

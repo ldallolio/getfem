@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8...3.20)
 set (project bimaterial_crack_test)
 set(${project}_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/bimaterial_crack_test.cc

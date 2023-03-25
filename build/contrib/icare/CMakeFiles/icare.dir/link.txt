@@ -1,2 +1,0 @@
-/usr/bin/ar qc libicare.a  CMakeFiles/icare.dir/icare.cc.o
-/usr/bin/ranlib libicare.a

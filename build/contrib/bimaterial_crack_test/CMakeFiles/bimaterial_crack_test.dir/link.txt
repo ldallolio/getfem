@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbimaterial_crack_test.a  CMakeFiles/bimaterial_crack_test.dir/bimaterial_crack_test.cc.o CMakeFiles/bimaterial_crack_test.dir/getfem_Xfem.cc.o CMakeFiles/bimaterial_crack_test.dir/crack_exact_solution.cc.o CMakeFiles/bimaterial_crack_test.dir/crack.cc.o
-/usr/bin/ranlib libbimaterial_crack_test.a

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8...3.20)
 set (project src)
 
 set(${project}_SOURCES
@@ -81,4 +81,5 @@ set(${project}_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/getfem_interpolation_on_deformed_domains.cc
 	${CMAKE_CURRENT_SOURCE_DIR}/getfem_integration.cc
 )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 add_library(${project} STATIC ${${project}_SOURCES} )
