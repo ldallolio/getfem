@@ -378,3 +378,4 @@ Makefile
 /tests/thermo_elasticity_electrical_coupling
 /tests/wave_equation
 build/
+.vscode/

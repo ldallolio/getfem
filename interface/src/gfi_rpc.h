@@ -28,7 +28,6 @@
  might be covered by the GNU Lesser General Public License.
 
 ===========================================================================*/
-*/
 
 #ifndef GFI_RPC_H
 #define GFI_RPC_H

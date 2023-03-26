@@ -229,18 +229,6 @@ namespace getfem {
     return partitioning_allowed;
   }
 
-  /* may be optimized .. */
-  const dal::bit_vector&  mesh_region::index() const
-  {
-    GMM_ASSERT1(p.get(), "Use from_mesh on that region before");
-    dal::bit_vector& convex_index = rp().index_.thrd_cast();
-    convex_index.clear();
-    for (const_iterator it = begin(); it != end(); ++it)
-    {
-      if (it->second.any()) convex_index.add(it->first);
-    }
-  }
-
   const dal::bit_vector&  mesh_region::index() const{
     GMM_ASSERT1(p, "Use from_mesh on that region before");
     if (me_is_multithreaded_now()) {

@@ -286,7 +286,7 @@ all_faces(const getfem::mesh &m, mexargs_in &in, mexargs_out &out) {
   else cvlst = m.convex_index();
   getfem::mesh_region mr;
   for (dal::bv_visitor ic(cvlst); !ic.finished(); ++ic) mr.add(ic);
-  getfem::mesh_region mrr =  all_faces_of_mesh(m, mr);
+  getfem::mesh_region mrr =  getfem::all_faces_of_mesh(m, mr);
 
   unsigned fcnt = 0;
   for (getfem::mr_visitor i(mrr); !i.finished(); ++i) ++fcnt;

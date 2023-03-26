@@ -74,4 +74,5 @@ set(${project}_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/getfemint_std.h
 	${CMAKE_CURRENT_SOURCE_DIR}/gfi_rpc.h
 )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 add_library(${project} STATIC ${${project}_SOURCES} )

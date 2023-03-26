@@ -23,6 +23,8 @@
 
 using namespace getfemint;
 
+// LD COMMENT BECAUSE IF mexPrintf not defined
+#if 0
 void
 print_poly(bgeot::base_poly *pp) {
   bool first = true; bgeot::size_type n = 0;
@@ -51,6 +53,8 @@ print_poly(bgeot::base_poly *pp) {
   if (n == 0) mexPrintf("0");
   mexPrintf("\n");
 }
+
+
 
 /*@GFDOC
   @ARGS{@tpoly P}
@@ -81,3 +85,4 @@ void gf_poly(getfemint::mexargs_in& in, getfemint::mexargs_out& out)
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   catch_errors(nlhs, plhs, nrhs, prhs, gf_poly, "gf_poly");
 }
+#endif

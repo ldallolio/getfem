@@ -646,6 +646,8 @@ namespace getfem {
     return fl;
   }
 
+  mesh_region APIDECL all_faces_of_mesh(const mesh &m, const mesh_region &mr);
+
   /** Select all the faces sharing at least two element of the given mesh
       region. Each face is represented only once and is arbitrarily chosen
       between the two neighbor elements.

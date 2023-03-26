@@ -93,7 +93,7 @@ gfmrpc_call_1_svc(int config_id, char *funname, gfi_array_list in, int nlhs,  st
     gfi_array_print(pin[i]);
     }*/
   /* pout = calloc(nlhs == 0 ? 1 : nlhs, sizeof(gfi_array*)); */
-  errmsg = getfem_interface_main(config_id, funname, in.arg.arg_len, (const gfi_array**)pin, &nlhs, &pout, &infomsg);
+  errmsg = getfem_interface_main(config_id, funname, in.arg.arg_len, (const gfi_array**)pin, &nlhs, &pout, &infomsg,0);
   if (infomsg == NULL) infomsg = strdup(""); /* or xdr will complain */
   result.infomsg = infomsg;
   if (errmsg) {
